@@ -11,7 +11,7 @@ export default function Home() {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { 
+    const {
       name, type, checked, value
     } = event.target;
 
@@ -21,12 +21,20 @@ export default function Home() {
     }))
   };
 
+  const proncessarSenha = () => {
+    const arrNumBase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const arrLetrasBase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  
+      
+  
+  }
+
+
   return (
     <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center">
       <section className="w-full flex flex-col items-center justify-center">
         <form
           title="Generate a secure Password"
-          action="submit"
           className="w-4/12"
         >
           <fieldset className="w-full border rounded-2xl border-[#c7c7c7] flex flex-col items-start justify-center px-10 py-5 gap-5">
@@ -39,7 +47,7 @@ export default function Home() {
                 required
                 min={6}
                 max={64}
-                className="w-8/12 border rounded-2xl border-[#c7c7c7] px-2 py-1"
+                className="w-8/12 border rounded-2xl border-[#c7c7c7] px-2 py-1 outline-none"
                 id="passwordLength"
                 name="passwordLength"
                 placeholder="6"
@@ -51,31 +59,31 @@ export default function Home() {
             <div className="w-full flex flex-row justify-start items-center gap-4">
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="uppercaseLetters">Capital letters</label>
-                <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" checked={formValues.uppercaseLetters} onChange={handleChange}/>
+                <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" checked={formValues.uppercaseLetters} onChange={handleChange} />
               </div>
 
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="lowercaseLetters">Lowercase letters</label>
-                <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" checked={formValues.lowercaseLetters} onChange={handleChange}/>
+                <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" checked={formValues.lowercaseLetters} onChange={handleChange} />
               </div>
             </div>
 
             <div className="w-full flex flex-row justify-start items-center gap-4">
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="numbers">Numbers</label>
-                <input type="checkbox" id="numbers" name="numbers" checked={formValues.numbers} onChange={handleChange}/>
+                <input type="checkbox" id="numbers" name="numbers" checked={formValues.numbers} onChange={handleChange} />
               </div>
 
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="specialSymbols">Special symbols (!@#$%&*)</label>
-                <input type="checkbox" id="specialSymbols" name="specialSymbols" checked={formValues.specialSymbols} onChange={handleChange}/>
+                <input type="checkbox" id="specialSymbols" name="specialSymbols" checked={formValues.specialSymbols} onChange={handleChange} />
               </div>
             </div>
 
             <div className="w-full flex flex-col items-center justify-center">
               <button
-                type="submit"
                 className="border rounded-2xl border-[#c7c7c7] px-6 py-2 bg-[#e61111] text-white border-none"
+                onClick={proncessarSenha}
               >
                 Generate password
               </button>
