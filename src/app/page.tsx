@@ -1,6 +1,6 @@
 'use client';
 import ModalNotificacao from "@/componentes/modal";
-import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { TfiReload } from "react-icons/tfi";
@@ -16,6 +16,7 @@ export default function Home() {
 
   const [generatedPassword, setGeneratedPassword] = useState<string>('');
   const [modal, setOpenModal] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -83,6 +84,9 @@ export default function Home() {
     setOpenModal(true);
   }
 
+  function redirectUser(routerTo: string) {
+    router.replace(routerTo);
+  }
 
   return (
     <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center p-10">
@@ -190,7 +194,7 @@ export default function Home() {
               </button>
             </div>
             <div className="w-full flex flex-col items-center justify-center">
-              <button onClick={(e) => { e.preventDefault(); }} className="w-full bg-[#e61111] text-white px-4 py-4 rounded-2xl flex flex-col justify-center items-center">
+              <button onClick={(e) => { e.preventDefault(); redirectUser('/'); setGeneratedPassword('')}} className="w-full bg-[#e61111] text-white px-4 py-4 rounded-2xl flex flex-col justify-center items-center">
                 <TfiReload />
               </button>
             </div>
