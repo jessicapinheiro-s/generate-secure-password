@@ -18,15 +18,56 @@ export default function Home() {
     setFormValues((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }))
+    }));
   };
 
+  const sortearValor = (arr: any[]): string => {
+    const index = Math.floor(Math.random() * arr.length);
+
+    return arr[index];
+  }
+
   const proncessarSenha = () => {
-    const arrNumBase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    if (!formValues.lowercaseLetters && !formValues.specialSymbols && !formValues.uppercaseLetters && !formValues.numbers) return;
+
+    const arrNumBase = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     const arrLetrasBase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-  
-      
-  
+    const arrLetrasBaseMaiusculas = [
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+      "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+      "U", "V", "W", "X", "Y", "Z"
+    ];
+    const arrCarcEspeciais = `!@#$%^&*()_+-=[]{}|;:'",.<>?/\\\``.split("");
+
+    const objBaseToParam = [
+      {
+        required: formValues.numbers,
+        valueParm: arrNumBase
+      },
+      {
+        required: formValues.lowercaseLetters,
+        valueParm: arrLetrasBase
+      },
+      {
+        required: formValues.uppercaseLetters,
+        valueParm: arrLetrasBaseMaiusculas
+      },
+      {
+        required: formValues.specialSymbols,
+        valueParm: arrCarcEspeciais
+      }
+    ]
+
+    const arrParametrosAserConsiderados = objBaseToParam.filter(item => item.required);
+    const unionParamConsiderados = arrParametrosAserConsiderados.map(item => item.valueParm).reduce((prev, current) => [...prev, ...current], []);
+
+    let password = '';
+
+    for (let i = 0; i < formValues.passwordLength; i++) {
+      const valorSorteado = sortearValor(unionParamConsiderados);
+      password += valorSorteado;
+    }
+    console.log(password);
   }
 
 
@@ -84,6 +125,7 @@ export default function Home() {
               <button
                 className="border rounded-2xl border-[#c7c7c7] px-6 py-2 bg-[#e61111] text-white border-none"
                 onClick={proncessarSenha}
+                type="button"
               >
                 Generate password
               </button>
