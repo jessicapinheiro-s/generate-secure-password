@@ -92,10 +92,10 @@ export default function Home() {
               className="w-4/12"
             >
               <fieldset className="w-full border rounded-2xl border-[#c7c7c7] flex flex-col items-start justify-center px-10 py-5 gap-5">
-                <legend className="font-bold text-3xl">Generate a secure Password</legend>
+                <legend className="font-bold text-3xl text-[#303030]">Generate a secure Password</legend>
 
                 <div className="w-full flex flex-row items-center justify-start gap-2">
-                  <label htmlFor="passwordLength">Password length:</label>
+                  <label htmlFor="passwordLength text-[#303030]">Password length:</label>
                   <input
                     type="number"
                     required
@@ -112,24 +112,24 @@ export default function Home() {
 
                 <div className="w-full flex flex-row justify-start items-center gap-4">
                   <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
-                    <label htmlFor="uppercaseLetters">Capital letters</label>
+                    <label htmlFor="uppercaseLetters text-[#303030]">Capital letters</label>
                     <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" checked={formValues.uppercaseLetters} onChange={handleChange} />
                   </div>
 
                   <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
-                    <label htmlFor="lowercaseLetters">Lowercase letters</label>
+                    <label htmlFor="lowercaseLetters text-[#303030]">Lowercase letters</label>
                     <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" checked={formValues.lowercaseLetters} onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="w-full flex flex-row justify-start items-center gap-4">
                   <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
-                    <label htmlFor="numbers">Numbers</label>
+                    <label htmlFor="numbers text-[#303030]">Numbers</label>
                     <input type="checkbox" id="numbers" name="numbers" checked={formValues.numbers} onChange={handleChange} />
                   </div>
 
                   <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
-                    <label htmlFor="specialSymbols">Special symbols (!@#$%&*)</label>
+                    <label htmlFor="specialSymbols text-[#303030]">Special symbols (!@#$%&*)</label>
                     <input type="checkbox" id="specialSymbols" name="specialSymbols" checked={formValues.specialSymbols} onChange={handleChange} />
                   </div>
                 </div>
