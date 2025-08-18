@@ -1,7 +1,9 @@
 'use client';
 import ModalNotificacao from "@/componentes/modal";
+import { redirect } from "next/dist/server/api-utils";
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
+import { TfiReload } from "react-icons/tfi";
 
 export default function Home() {
   const [formValues, setFormValues] = useState({
@@ -83,25 +85,25 @@ export default function Home() {
 
 
   return (
-    <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center">
+    <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center p-10">
       {
         !generatedPassword && (
           <section className="w-full flex flex-col items-center justify-center">
             <form
               title="Generate a secure Password"
-              className="w-4/12"
+              className="w-full lg:w-4/12 border rounded-2xl border-[#c7c7c7] px-10 py-5"
             >
-              <fieldset className="w-full border rounded-2xl border-[#c7c7c7] flex flex-col items-start justify-center px-10 py-5 gap-5">
-                <legend className="font-bold text-3xl text-[#303030]">Generate a secure Password</legend>
+              <fieldset className="w-full flex flex-col items-start justify-center gap-10">
+                <legend className="font-bold text-3xl text-[#303030] my-4">Generate a secure Password</legend>
 
-                <div className="w-full flex flex-row items-center justify-start gap-2">
+                <div className="w-full flex flex-row items-center justify-start gap-2 flex-wrap">
                   <label htmlFor="passwordLength text-[#303030]">Password length:</label>
                   <input
                     type="number"
                     required
                     min={6}
                     max={64}
-                    className="w-8/12 border rounded-2xl border-[#c7c7c7] px-2 py-1 outline-none"
+                    className="w-full md:w-8/12 border rounded-2xl border-[#c7c7c7] px-2 py-1 outline-none"
                     id="passwordLength"
                     name="passwordLength"
                     placeholder="6"
@@ -110,27 +112,55 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="w-full flex flex-row justify-start items-center gap-4">
-                  <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
+                <div className="w-full flex flex-row justify-start items-center gap-4 flex-wrap ">
+                  <div className="flex flex-row-reverse items-center justify-end gap-2 md:w-[48%] w-full ">
                     <label htmlFor="uppercaseLetters text-[#303030]">Capital letters</label>
-                    <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" checked={formValues.uppercaseLetters} onChange={handleChange} />
+                    <input 
+                      type="checkbox" 
+                      id="uppercaseLetters" 
+                      name="uppercaseLetters" 
+                      checked={formValues.uppercaseLetters} 
+                      onChange={handleChange} 
+                      className="w-5 h-5 accent-[#e61111]"
+                    />
                   </div>
 
-                  <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
+                  <div className="flex flex-row-reverse items-center justify-end gap-2 md:w-[48%] w-full ">
                     <label htmlFor="lowercaseLetters text-[#303030]">Lowercase letters</label>
-                    <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" checked={formValues.lowercaseLetters} onChange={handleChange} />
+                    <input 
+                      type="checkbox" 
+                      id="lowercaseLetters" 
+                      name="lowercaseLetters" 
+                      checked={formValues.lowercaseLetters} 
+                      onChange={handleChange} 
+                      className="w-5 h-5 accent-[#e61111]"
+                    />
                   </div>
                 </div>
 
-                <div className="w-full flex flex-row justify-start items-center gap-4">
-                  <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
+                <div className="w-full flex flex-row justify-start items-center gap-4 flex-wrap">
+                  <div className="flex flex-row-reverse items-center justify-end gap-2 md:w-[48%] w-full ">
                     <label htmlFor="numbers text-[#303030]">Numbers</label>
-                    <input type="checkbox" id="numbers" name="numbers" checked={formValues.numbers} onChange={handleChange} />
+                    <input 
+                      type="checkbox" 
+                      id="numbers" 
+                      name="numbers" 
+                      checked={formValues.numbers} 
+                      onChange={handleChange} 
+                      className="w-5 h-5 accent-[#e61111]" 
+                    />
                   </div>
 
-                  <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
+                  <div className="flex flex-row-reverse items-center justify-end gap-2 md:w-[48%] w-full ">
                     <label htmlFor="specialSymbols text-[#303030]">Special symbols (!@#$%&*)</label>
-                    <input type="checkbox" id="specialSymbols" name="specialSymbols" checked={formValues.specialSymbols} onChange={handleChange} />
+                    <input 
+                      type="checkbox" 
+                      id="specialSymbols" 
+                      name="specialSymbols" 
+                      checked={formValues.specialSymbols} 
+                      onChange={handleChange} 
+                      className="w-5 h-5 accent-[#e61111]"
+                    />
                   </div>
                 </div>
 
@@ -151,12 +181,17 @@ export default function Home() {
 
       {
         generatedPassword && (
-          <section className="w-full flex flex-col items-center justify-center gap-4">
-            <h1 className="font-bold text-3xl">Senha gerada!</h1>
+          <section className="max-w-2xs flex flex-col items-center justify-center gap-4">
+            <h1 className="font-bold text-3xl text-[#303030]">Senha gerada!</h1>
             <div className="flex flex-row border rounded-2xl border-[#c7c7c7] px-4 py-2">
-              <input type="password" readOnly className="outline-none" value={generatedPassword.slice(0, 30)}/>
+              <input type="password" readOnly className="outline-none text-[#303030]" value={generatedPassword.slice(0, 30)}/>
               <button onClick={(e) => { e.preventDefault(); pasteText(); }}>
-                <FaRegCopy />
+                <FaRegCopy className="text-[#303030]" />
+              </button>
+            </div>
+            <div className="w-full flex flex-col items-center justify-center">
+              <button onClick={(e) => { e.preventDefault(); }} className="w-full bg-[#e61111] text-white px-4 py-4 rounded-2xl flex flex-col justify-center items-center">
+                <TfiReload />
               </button>
             </div>
           </section>
