@@ -29,7 +29,7 @@ export default function Home() {
     }));
   };
 
-  const sortearValor = (arr: any[]): string => {
+  const sortearValor = (arr: string[]): string => {
     const index = Math.floor(Math.random() * arr.length);
 
     return arr[index];
