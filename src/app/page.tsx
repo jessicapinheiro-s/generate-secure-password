@@ -1,4 +1,5 @@
 'use client';
+import ModalNotificacao from "@/componentes/modal";
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 
@@ -163,7 +164,7 @@ export default function Home() {
       }
       {
         modal && (
-          modal
+          <ModalNotificacao conteudo="Texto copiado!"/>
         )
       }
 
