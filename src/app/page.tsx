@@ -1,4 +1,26 @@
+'use client';
+import { useState } from "react";
+
 export default function Home() {
+  const [formValues, setFormValues] = useState({
+    passwordLength: 6,
+    uppercaseLetters: false,
+    lowercaseLetters: false,
+    numbers: false,
+    specialSymbols: false,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { 
+      name, type, checked, value
+    } = event.target;
+
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }))
+  };
+
   return (
     <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center">
       <section className="w-full flex flex-col items-center justify-center">
@@ -21,30 +43,32 @@ export default function Home() {
                 id="passwordLength"
                 name="passwordLength"
                 placeholder="6"
+                value={formValues.passwordLength}
+                onChange={handleChange}
               />
             </div>
 
             <div className="w-full flex flex-row justify-start items-center gap-4">
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="uppercaseLetters">Capital letters</label>
-                <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" />
+                <input type="checkbox" id="uppercaseLetters" name="uppercaseLetters" checked={formValues.uppercaseLetters} onChange={handleChange}/>
               </div>
 
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="lowercaseLetters">Lowercase letters</label>
-                <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" />
+                <input type="checkbox" id="lowercaseLetters" name="lowercaseLetters" checked={formValues.lowercaseLetters} onChange={handleChange}/>
               </div>
             </div>
 
             <div className="w-full flex flex-row justify-start items-center gap-4">
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="numbers">Numbers</label>
-                <input type="checkbox" id="numbers" name="numbers" />
+                <input type="checkbox" id="numbers" name="numbers" checked={formValues.numbers} onChange={handleChange}/>
               </div>
 
               <div className="flex flex-row-reverse items-center justify-end gap-2 w-6/12">
                 <label htmlFor="specialSymbols">Special symbols (!@#$%&*)</label>
-                <input type="checkbox" id="specialSymbols" name="specialSymbols" />
+                <input type="checkbox" id="specialSymbols" name="specialSymbols" checked={formValues.specialSymbols} onChange={handleChange}/>
               </div>
             </div>
 
