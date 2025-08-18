@@ -81,6 +81,7 @@ export default function Home() {
 
   function pasteText() {
     navigator.clipboard.writeText(generatedPassword);
+    console.log(`modal ${modal}`);
     setOpenModal(true);
   }
 
@@ -89,7 +90,7 @@ export default function Home() {
   }
 
   return (
-    <main className="w-full h-full flex flex-col gap-[32px] items-center justify-center p-4 md:p-10">
+    <main className="w-full min-h-full flex flex-col gap-[32px] items-center justify-center p-4 md:p-10">
       {
         !generatedPassword && (
           <section className="w-full flex flex-col items-center justify-center">
@@ -177,7 +178,7 @@ export default function Home() {
                 </button>
               </div>
               <div className="w-5/5 md:w-1/5 flex flex-col items-center justify-center">
-                <button onClick={(e) => { e.preventDefault(); redirectUser('/'); setGeneratedPassword('') }} className="w-full bg-[#e61111] focus:ring-2 focus:ring-red-500 text-white px-4 py-4 rounded-lg flex flex-col justify-center items-center">
+                <button onClick={(e) => { e.preventDefault(); redirectUser('/'); setGeneratedPassword(''); setOpenModal(false)}} className="w-full bg-[#e61111] focus:ring-2 focus:ring-red-500 text-white px-4 py-4 rounded-lg flex flex-col justify-center items-center">
                   <TfiReload />
                 </button>
               </div>
